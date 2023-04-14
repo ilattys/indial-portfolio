@@ -1,0 +1,79 @@
+//navbar
+.navbar-nav {
+  flex: 1;
+  margin: auto !important;
+  display: flex;
+  justify-content: space-around;
+}
+//underline navbar links
+.nav-link {
+  font-size: 18px;
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  opacity: 0;
+  transition: all 0.2s;
+  height: 2px;
+  width: 100%;
+  background-color: #9b6a3c;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.nav-link:hover::after{
+  opacity: 1;
+}
+
+// tablets and smaller
+@media (max-width: 991px) {
+  .nav-link::after {
+    background-color: transparent;
+  }
+  .navbar-nav {
+    position: absolute;
+    width: 100%;
+  }
+}
+
+#toggle:checked {
+  &~nav {
+    opacity:1;
+    visibility:visible;
+
+    .navbar-nav {
+      top:70px;
+
+      a {
+        transform:translateY(0px);
+        opacity:1;
+
+        @for $i from 1 through 4 {
+          $t: $i * 0.1;
+          &:nth-child(#{$i}) {
+            transition:all 0.3s cubic-bezier(.6,0,.8,1.5) #{$t}s;
+          }
+        }
+      }
+    }
+  }
+
+  &+label.toggle-btn {
+    .bar {
+      background-color:red;
+
+      &:nth-child(2) {
+        transform:translateX(50px);
+        opacity:0;
+      }
+
+      &:nth-child(1) {
+        transform:translateY(10px) rotate(45deg);
+      }
+
+      &:nth-child(3) {
+        transform:translateY(-8px) rotate(-45deg);
+      }
+    }
+  }
+}
